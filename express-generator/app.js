@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var birdsRouter = require('./routes/birds');
 
 var app = express();
 
@@ -13,14 +14,31 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+const requestTime = (req, res, next) => {
+  req.requestTime = Date.now();
+  next();
+}
+
+async function validateCookie(req, res, next) {
+  try {
+    console.log('validateCookie', req)
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
+app.use(requestTime);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(validateCookie);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/birds', birdsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
