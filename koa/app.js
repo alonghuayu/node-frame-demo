@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const app = new Koa();
+const port = process.env.PORT || 3012;
 
 // logger
 app.use(async (ctx, next) => {
@@ -18,7 +19,7 @@ app.use(async (ctx, next) => {
 
 // response
 app.use(async (ctx) => {
-  ctx.body = "Hello World 23";
+  ctx.body = "Hello World 2013";
 });
 
-app.listen(3000);
+app.listen(port);
