@@ -12,7 +12,7 @@ import { CatsController } from "./cats/cats.controller";
 import { logger } from "./common/middleware/log.middleware";
 import { HttpExceptionFilter } from "./filter/http-exception.filter";
 import { RolesGuard } from "./guard/roles.guard";
-import { APP_GUARD, APP_FILTER } from '@nestjs/core';
+import { APP_GUARD, APP_FILTER } from "@nestjs/core";
 
 @Module({
   imports: [CatsModule],
