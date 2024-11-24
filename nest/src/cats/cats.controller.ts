@@ -7,6 +7,7 @@ import {
   Put,
   Param,
   Delete,
+  ForbiddenException,
 } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto/dto';
 import { CatsService } from './cats.service';
@@ -23,6 +24,7 @@ export class CatsController {
 
   @Get()
   async findAll(@Query() query: ListAllEntities): Promise<Cat[]> {
+    // throw new ForbiddenException();
     return this.catsService.findAll();
   }
 
