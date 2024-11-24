@@ -8,18 +8,22 @@ import {
   Param,
   Delete,
   ForbiddenException,
+  UseFilters,
 } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto/dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
+import { HttpExceptionFilter } from 'src/filter/http-exception.filter';
 
 @Controller('cats')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Post()
+  @UseFilters(HttpExceptionFilter)
   async create(@Body() createCatDto: CreateCatDto) {
-    this.catsService.create(createCatDto);
+    // this.catsService.create(createCatDto);
+    throw new ForbiddenException();
   }
 
   @Get()
